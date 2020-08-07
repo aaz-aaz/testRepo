@@ -3,6 +3,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.util.List;
 
@@ -12,19 +13,21 @@ public class CheckTests {
 
         System.out.println("Hello World !!!");
         System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
-        WebDriver driver = new ChromeDriver();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--start-maximized");
+        WebDriver driver = new ChromeDriver(options);
         driver.get("https://www.google.com/");
 
-        WebElement searchField = driver.findElement(By.xpath("//input[@id='lst-ib']"));
+        WebElement searchField = driver.findElement(By.xpath("//input[@title='Пошук']"));
         searchField.sendKeys("Selenium");
         searchField.sendKeys(Keys.ENTER);
 
-        List<WebElement> searchResults = driver.findElements(By.xpath("//div[@class='srg']/div[@class='g']"));
+        List<WebElement> searchResults = driver.findElements(By.xpath("//div[@class='rc']"));
         System.out.println("Search results count: "+searchResults.size());
 
         int searchResultsCount = searchResults.size();
 
-        if (searchResultsCount == 10) {
+        if (searchResultsCount == 9) {
             System.out.println("Search results count is correct: "+searchResultsCount);
         }
         else {
