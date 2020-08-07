@@ -17,6 +17,7 @@ public class CheckTests {
         options.addArguments("--start-maximized");
         WebDriver driver = new ChromeDriver(options);
         driver.get("https://www.google.com/");
+        System.out.printf("dsa");
 
         WebElement searchField = driver.findElement(By.xpath("//input[@title='Пошук']"));
         searchField.sendKeys("Selenium");
